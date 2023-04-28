@@ -18,12 +18,12 @@ import (
 	"sync"
 	texttemplate "text/template"
 
-	"github.com/360EntSecGroup-Skylar/goreporter/linters/simpler/lint"
-	"github.com/360EntSecGroup-Skylar/goreporter/linters/simpler/ssa"
-	"github.com/360EntSecGroup-Skylar/goreporter/linters/staticcheck/functions"
-	"github.com/360EntSecGroup-Skylar/goreporter/linters/staticcheck/gcsizes"
-	"github.com/360EntSecGroup-Skylar/goreporter/linters/staticcheck/internal/sharedcheck"
-	"github.com/360EntSecGroup-Skylar/goreporter/linters/staticcheck/vrp"
+	"goreporter/linters/simpler/lint"
+	"goreporter/linters/simpler/ssa"
+	"goreporter/linters/staticcheck/functions"
+	"goreporter/linters/staticcheck/gcsizes"
+	"goreporter/linters/staticcheck/internal/sharedcheck"
+	"goreporter/linters/staticcheck/vrp"
 
 	"golang.org/x/tools/go/ast/astutil"
 )

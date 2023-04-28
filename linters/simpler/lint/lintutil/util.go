@@ -22,7 +22,7 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/360EntSecGroup-Skylar/goreporter/linters/simpler/lint"
+	"goreporter/linters/simpler/lint"
 
 	"github.com/kisielk/gotool"
 	"golang.org/x/tools/go/loader"

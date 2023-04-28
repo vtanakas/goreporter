@@ -21,7 +21,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/360EntSecGroup-Skylar/goreporter/linters/simpler/lint"
+	"goreporter/linters/simpler/lint"
 
 	"golang.org/x/tools/go/loader"
 )

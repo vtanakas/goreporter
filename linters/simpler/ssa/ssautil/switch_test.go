@@ -4,6 +4,7 @@
 
 // No testdata on Android.
 
+//go:build !android
 // +build !android
 
 package ssautil_test
@@ -13,9 +14,9 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/360EntSecGroup-Skylar/goreporter/linters/simpler/ssa"
-	"github.com/360EntSecGroup-Skylar/goreporter/linters/simpler/ssa/ssautil"
 	"golang.org/x/tools/go/loader"
+	"goreporter/linters/simpler/ssa"
+	"goreporter/linters/simpler/ssa/ssautil"
 )
 
 func TestSwitches(t *testing.T) {

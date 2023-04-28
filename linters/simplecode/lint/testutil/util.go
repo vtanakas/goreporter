@@ -21,7 +21,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/360EntSecGroup-Skylar/goreporter/linters/simplecode/lint"
+	"goreporter/linters/simplecode/lint"
 )
 
 var lintMatch = flag.String("lint.match", "", "restrict testdata matches to this pattern")

@@ -5,9 +5,9 @@
 package static
 
 import (
-	"github.com/360EntSecGroup-Skylar/goreporter/linters/simpler/ssa"
-	"github.com/360EntSecGroup-Skylar/goreporter/linters/simpler/ssa/ssautil"
-	"github.com/360EntSecGroup-Skylar/goreporter/linters/staticcheck/callgraph"
+	"goreporter/linters/simpler/ssa"
+	"goreporter/linters/simpler/ssa/ssautil"
+	"goreporter/linters/staticcheck/callgraph"
 )
 
 // CallGraph computes the call graph of the specified program

@@ -5,7 +5,7 @@
 // package ssautil // import "github.com/360EntSecGroup-Skylar/goreporter/linters/simpler/ssa/ssautil"
 package ssautil
 
-import "github.com/360EntSecGroup-Skylar/goreporter/linters/simpler/ssa"
+import "goreporter/linters/simpler/ssa"
 
 // This file defines utilities for visiting the SSA representation of
 // a Program.

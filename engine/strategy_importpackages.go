@@ -1,8 +1,8 @@
 package engine
 
 import (
-	"github.com/360EntSecGroup-Skylar/goreporter/linters/unittest"
-	"github.com/360EntSecGroup-Skylar/goreporter/utils"
+	"goreporter/linters/unittest"
+	"goreporter/utils"
 )
 
 type StrategyImportPackages struct {

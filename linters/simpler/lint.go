@@ -13,9 +13,9 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/360EntSecGroup-Skylar/goreporter/linters/simpler/internal/sharedcheck"
-	"github.com/360EntSecGroup-Skylar/goreporter/linters/simpler/lint"
-	"github.com/360EntSecGroup-Skylar/goreporter/linters/simpler/ssa"
+	"goreporter/linters/simpler/internal/sharedcheck"
+	"goreporter/linters/simpler/lint"
+	"goreporter/linters/simpler/ssa"
 
 	"golang.org/x/tools/go/types/typeutil"
 )

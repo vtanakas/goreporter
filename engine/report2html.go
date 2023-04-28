@@ -30,7 +30,7 @@ import (
 	"github.com/golang/glog"
 	"github.com/json-iterator/go"
 
-	"github.com/360EntSecGroup-Skylar/goreporter/utils"
+	"goreporter/utils"
 )
 
 var (
@@ -38,35 +38,36 @@ var (
 )
 
 // UnitTest is a struct that contains some features in a report of html.
-//         GoReporter HTML Report Features
 //
-//    +----------------------------------------------------------------------+
-//    |        Feature        |                 Information                  |
-//    +=======================+==============================================+
-//    | Project               | The path address of the item being detected  |
-//    +-----------------------+----------------------------------------------+
-//    | Score                 | The score of the tested project              |
-//    +-----------------------+----------------------------------------------+
-//    | CodeTest              | Unit test results                            |
-//    +-----------------------+----------------------------------------------+
-//    | IssuesNum             | Issues number of the project                 |
-//    +-----------------------+----------------------------------------------+
-//    | CodeCount             | Number of lines of code                      |
-//    +-----------------------+----------------------------------------------+
-//    | CodeStyle             | Code style check                             |
-//    +-----------------------+----------------------------------------------+
-//    | CodeOptimization      | Code optimization                            |
-//    +-----------------------+----------------------------------------------+
-//    | CodeSmell             | Code smell                                   |
-//    +-----------------------+----------------------------------------------+
-//    | DepGraph              | Depend graph of all packages in the project  |
-//    +-----------------------+----------------------------------------------+
-//    | Date                  | Date assessment of the project               |
-//    +-----------------------+----------------------------------------------+
-//    | LastRefresh           | Last refresh time of one project             |
-//    +-----------------------+----------------------------------------------+
-//    | HumanizedLastRefresh  | Humanized last refresh setting               |
-//    +-----------------------+----------------------------------------------+
+//	     GoReporter HTML Report Features
+//
+//	+----------------------------------------------------------------------+
+//	|        Feature        |                 Information                  |
+//	+=======================+==============================================+
+//	| Project               | The path address of the item being detected  |
+//	+-----------------------+----------------------------------------------+
+//	| Score                 | The score of the tested project              |
+//	+-----------------------+----------------------------------------------+
+//	| CodeTest              | Unit test results                            |
+//	+-----------------------+----------------------------------------------+
+//	| IssuesNum             | Issues number of the project                 |
+//	+-----------------------+----------------------------------------------+
+//	| CodeCount             | Number of lines of code                      |
+//	+-----------------------+----------------------------------------------+
+//	| CodeStyle             | Code style check                             |
+//	+-----------------------+----------------------------------------------+
+//	| CodeOptimization      | Code optimization                            |
+//	+-----------------------+----------------------------------------------+
+//	| CodeSmell             | Code smell                                   |
+//	+-----------------------+----------------------------------------------+
+//	| DepGraph              | Depend graph of all packages in the project  |
+//	+-----------------------+----------------------------------------------+
+//	| Date                  | Date assessment of the project               |
+//	+-----------------------+----------------------------------------------+
+//	| LastRefresh           | Last refresh time of one project             |
+//	+-----------------------+----------------------------------------------+
+//	| HumanizedLastRefresh  | Humanized last refresh setting               |
+//	+-----------------------+----------------------------------------------+
 //
 // And the HtmlData just as data for default html template. If you want to customize
 // your own template file, please follow these data, or you can redefine it yourself.

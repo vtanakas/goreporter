@@ -2,6 +2,7 @@
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
+//go:build go1.5
 // +build go1.5
 
 package ssautil
@@ -13,8 +14,8 @@ import (
 	"go/token"
 	"go/types"
 
-	"github.com/360EntSecGroup-Skylar/goreporter/linters/simpler/ssa"
 	"golang.org/x/tools/go/loader"
+	"goreporter/linters/simpler/ssa"
 )
 
 // CreateProgram returns a new program in SSA form, given a program
@@ -25,7 +26,6 @@ import (
 // on the result.
 //
 // mode controls diagnostics and checking during SSA construction.
-//
 func CreateProgram(lprog *loader.Program, mode ssa.BuilderMode) *ssa.Program {
 	prog := ssa.NewProgram(lprog.Fset, mode)
 
@@ -52,7 +52,6 @@ func CreateProgram(lprog *loader.Program, mode ssa.BuilderMode) *ssa.Program {
 // The operation fails if there were any type-checking or import errors.
 //
 // See ../ssa/example_test.go for an example.
-//
 func BuildPackage(tc *types.Config, fset *token.FileSet, pkg *types.Package, files []*ast.File, mode ssa.BuilderMode) (*ssa.Package, *types.Info, error) {
 	if fset == nil {
 		panic("no token.FileSet")

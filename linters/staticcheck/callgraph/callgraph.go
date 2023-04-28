@@ -45,7 +45,7 @@ import (
 	"fmt"
 	"go/token"
 
-	"github.com/360EntSecGroup-Skylar/goreporter/linters/simpler/ssa"
+	"goreporter/linters/simpler/ssa"
 )
 
 // A Graph represents a call graph.

@@ -13,7 +13,7 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/360EntSecGroup-Skylar/goreporter/linters/simplecode/lint"
+	"goreporter/linters/simplecode/lint"
 )
 
 var Funcs = []lint.Func{

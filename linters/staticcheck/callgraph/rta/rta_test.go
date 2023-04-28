@@ -4,6 +4,7 @@
 
 // No testdata on Android.
 
+//go:build !android
 // +build !android
 
 package rta_test
@@ -20,11 +21,11 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/360EntSecGroup-Skylar/goreporter/linters/simpler/ssa"
-	"github.com/360EntSecGroup-Skylar/goreporter/linters/simpler/ssa/ssautil"
-	"github.com/360EntSecGroup-Skylar/goreporter/linters/staticcheck/callgraph"
-	"github.com/360EntSecGroup-Skylar/goreporter/linters/staticcheck/callgraph/rta"
 	"golang.org/x/tools/go/loader"
+	"goreporter/linters/simpler/ssa"
+	"goreporter/linters/simpler/ssa/ssautil"
+	"goreporter/linters/staticcheck/callgraph"
+	"goreporter/linters/staticcheck/callgraph/rta"
 )
 
 var inputs = []string{
@@ -50,7 +51,6 @@ func expectation(f *ast.File) (string, token.Pos) {
 // The results string consists of two parts: the set of dynamic call
 // edges, "f --> g", one per line, and the set of reachable functions,
 // one per line.  Each set is sorted.
-//
 func TestRTA(t *testing.T) {
 	for _, filename := range inputs {
 		content, err := ioutil.ReadFile(filename)

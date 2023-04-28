@@ -52,9 +52,9 @@ import (
 	"fmt"
 	"go/types"
 
-	"github.com/360EntSecGroup-Skylar/goreporter/linters/simpler/ssa"
-	"github.com/360EntSecGroup-Skylar/goreporter/linters/staticcheck/callgraph"
 	"golang.org/x/tools/go/types/typeutil"
+	"goreporter/linters/simpler/ssa"
+	"goreporter/linters/staticcheck/callgraph"
 )
 
 // A Result holds the results of Rapid Type Analysis, which includes the

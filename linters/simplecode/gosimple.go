@@ -3,8 +3,8 @@
 package simplecode
 
 import (
-	"github.com/360EntSecGroup-Skylar/goreporter/linters/simplecode/lint/lintutil"
-	"github.com/360EntSecGroup-Skylar/goreporter/linters/simplecode/simple"
+	"goreporter/linters/simplecode/lint/lintutil"
+	"goreporter/linters/simplecode/simple"
 )
 
 func Simple(path map[string]string, except string) []string {

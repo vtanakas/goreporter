@@ -18,9 +18,9 @@ import (
 	"sync"
 	"testing"
 
-	"github.com/360EntSecGroup-Skylar/goreporter/engine/processbar"
 	"github.com/facebookgo/inject"
 	"github.com/golang/glog"
+	"goreporter/engine/processbar"
 )
 
 func Test_Engine(t *testing.T) {
