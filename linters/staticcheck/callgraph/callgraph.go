@@ -32,7 +32,9 @@ in the call graph; they are treated like built-in operators of the
 language.
 
 */
-package callgraph // import "github.com/360EntSecGroup-Skylar/goreporter/linters/staticcheck/callgraph"
+// FIXME: (issue #2) investigate need for this import directive.
+// package callgraph // import "github.com/360EntSecGroup-Skylar/goreporter/linters/staticcheck/callgraph"
+package callgraph
 
 // TODO(adonovan): add a function to eliminate wrappers from the
 // callgraph, preserving topology.
@@ -51,7 +53,6 @@ import (
 // A graph may contain nodes that are not reachable from the root.
 // If the call graph is sound, such nodes indicate unreachable
 // functions.
-//
 type Graph struct {
 	Root  *Node                   // the distinguished root node
 	Nodes map[*ssa.Function]*Node // all nodes by function

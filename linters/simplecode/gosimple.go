@@ -1,4 +1,6 @@
-package simplecode // import "github.com/360EntSecGroup-Skylar/goreporter/linters/simplecode"
+// FIXME: (issue #2) investigate need for this import directive.
+// package simplecode // import "github.com/360EntSecGroup-Skylar/goreporter/linters/simplecode"
+package simplecode
 
 import (
 	"github.com/360EntSecGroup-Skylar/goreporter/linters/simplecode/lint/lintutil"

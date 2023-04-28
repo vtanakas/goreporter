@@ -1,5 +1,7 @@
 // Package staticcheck contains a linter for Go source code.
-package staticcheck // import "github.com/360EntSecGroup-Skylar/goreporter/linters/staticcheck"
+// FIXME: (issue #2) investigate need for this import directive.
+// package staticcheck // import "github.com/360EntSecGroup-Skylar/goreporter/linters/staticcheck"
+package staticcheck
 
 import (
 	"fmt"

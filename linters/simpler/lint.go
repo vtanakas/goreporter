@@ -1,5 +1,7 @@
 // Package simpler contains a linter for Go source code.
-package simpler // import "github.com/360EntSecGroup-Skylar/goreporter/linters/simpler"
+// FIXME: (issue #2) investigate need for this import directive.
+// package simpler // import "github.com/360EntSecGroup-Skylar/goreporter/linters/simpler"
+package simpler
 
 import (
 	"go/ast"
@@ -549,12 +551,11 @@ func (c *Checker) LintIfReturn(j *lint.Job) {
 
 // LintRedundantNilCheckWithLen checks for the following reduntant nil-checks:
 //
-//   if x == nil || len(x) == 0 {}
-//   if x != nil && len(x) != 0 {}
-//   if x != nil && len(x) == N {} (where N != 0)
-//   if x != nil && len(x) > N {}
-//   if x != nil && len(x) >= N {} (where N != 0)
-//
+//	if x == nil || len(x) == 0 {}
+//	if x != nil && len(x) != 0 {}
+//	if x != nil && len(x) == N {} (where N != 0)
+//	if x != nil && len(x) > N {}
+//	if x != nil && len(x) >= N {} (where N != 0)
 func (c *Checker) LintRedundantNilCheckWithLen(j *lint.Job) {
 	isConstZero := func(expr ast.Expr) (isConst bool, isZero bool) {
 		_, ok := expr.(*ast.BasicLit)

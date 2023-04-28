@@ -3,8 +3,9 @@
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file or at
 // https://developers.google.com/open-source/licenses/bsd.
-
-package testutil // import "github.com/360EntSecGroup-Skylar/goreporter/linters/simpler/lint/testutil"
+// FIXME: (issue #2) investigate need for this import directive.
+// package testutil // import "github.com/360EntSecGroup-Skylar/goreporter/linters/simpler/lint/testutil"
+package testutil
 
 import (
 	"flag"
