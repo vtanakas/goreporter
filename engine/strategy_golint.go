@@ -4,8 +4,8 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/360EntSecGroup-Skylar/goreporter/linters/golint"
-	"github.com/360EntSecGroup-Skylar/goreporter/utils"
+	"goreporter/linters/golint"
+	"goreporter/utils"
 )
 
 type StrategyLint struct {

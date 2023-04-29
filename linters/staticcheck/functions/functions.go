@@ -4,10 +4,10 @@ import (
 	"go/types"
 	"sync"
 
-	"github.com/360EntSecGroup-Skylar/goreporter/linters/simpler/ssa"
-	"github.com/360EntSecGroup-Skylar/goreporter/linters/staticcheck/callgraph"
-	"github.com/360EntSecGroup-Skylar/goreporter/linters/staticcheck/callgraph/static"
-	"github.com/360EntSecGroup-Skylar/goreporter/linters/staticcheck/vrp"
+	"goreporter/linters/simpler/ssa"
+	"goreporter/linters/staticcheck/callgraph"
+	"goreporter/linters/staticcheck/callgraph/static"
+	"goreporter/linters/staticcheck/vrp"
 )
 
 var stdlibDescs = map[string]Description{

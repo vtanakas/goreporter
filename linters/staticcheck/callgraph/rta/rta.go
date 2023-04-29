@@ -40,7 +40,9 @@
 // cmd/callgraph tool on its own source takes ~2.1s for RTA and ~5.4s
 // for points-to analysis.
 //
-package rta // import "github.com/360EntSecGroup-Skylar/goreporter/linters/staticcheck/callgraph/rta"
+// FIXME: (issue #2) investigate need for this import directive.
+// package rta // import "github.com/360EntSecGroup-Skylar/goreporter/linters/staticcheck/callgraph/rta"
+package rta
 
 // TODO(adonovan): test it by connecting it to the interpreter and
 // replacing all "unreachable" functions by a special intrinsic, and
@@ -50,14 +52,13 @@ import (
 	"fmt"
 	"go/types"
 
-	"github.com/360EntSecGroup-Skylar/goreporter/linters/simpler/ssa"
-	"github.com/360EntSecGroup-Skylar/goreporter/linters/staticcheck/callgraph"
 	"golang.org/x/tools/go/types/typeutil"
+	"goreporter/linters/simpler/ssa"
+	"goreporter/linters/staticcheck/callgraph"
 )
 
 // A Result holds the results of Rapid Type Analysis, which includes the
 // set of reachable functions/methods, runtime types, and the call graph.
-//
 type Result struct {
 	// CallGraph is the discovered callgraph.
 	// It does not include edges for calls made via reflection.
@@ -262,7 +263,6 @@ func (r *rta) visitFunc(f *ssa.Function) {
 // If buildCallGraph is true, Result.CallGraph will contain a call
 // graph; otherwise, only the other fields (reachable functions) are
 // populated.
-//
 func Analyze(roots []*ssa.Function, buildCallGraph bool) *Result {
 	if len(roots) == 0 {
 		return nil
@@ -341,7 +341,6 @@ func (r *rta) implementations(I *types.Interface) []types.Type {
 // addRuntimeType is called for each concrete type that can be the
 // dynamic type of some interface or reflect.Value.
 // Adapted from needMethods in go/ssa/builder.go
-//
 func (r *rta) addRuntimeType(T types.Type, skip bool) {
 	if prev, ok := r.result.RuntimeTypes.At(T).(bool); ok {
 		if skip && !prev {

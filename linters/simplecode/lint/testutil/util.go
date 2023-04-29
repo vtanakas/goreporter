@@ -4,7 +4,9 @@
 // license that can be found in the LICENSE file or at
 // https://developers.google.com/open-source/licenses/bsd.
 
-package testutil // import "github.com/360EntSecGroup-Skylar/goreporter/linters/simplecode/lint/testutil"
+// FIXME: (issue #2) investigate need for this import directive.
+// package testutil // import "github.com/360EntSecGroup-Skylar/goreporter/linters/simplecode/lint/testutil"
+package testutil
 
 import (
 	"flag"
@@ -19,7 +21,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/360EntSecGroup-Skylar/goreporter/linters/simplecode/lint"
+	"goreporter/linters/simplecode/lint"
 )
 
 var lintMatch = flag.String("lint.match", "", "restrict testdata matches to this pattern")

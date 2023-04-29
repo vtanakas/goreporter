@@ -27,9 +27,9 @@ import (
 	"sync"
 	"time"
 
-	"github.com/360EntSecGroup-Skylar/goreporter/engine"
-	"github.com/360EntSecGroup-Skylar/goreporter/engine/processbar"
 	"github.com/facebookgo/inject"
+	"goreporter/engine"
+	"goreporter/engine/processbar"
 )
 
 // Received parameters, you can control some features using:

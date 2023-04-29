@@ -4,8 +4,8 @@ import (
 	"go/token"
 	"go/types"
 
-	"github.com/360EntSecGroup-Skylar/goreporter/linters/simpler/ssa"
-	"github.com/360EntSecGroup-Skylar/goreporter/linters/staticcheck/callgraph"
+	"goreporter/linters/simpler/ssa"
+	"goreporter/linters/staticcheck/callgraph"
 )
 
 func (d *Descriptions) IsPure(fn *ssa.Function) bool {

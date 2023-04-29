@@ -1,5 +1,7 @@
 // Package simple contains a linter for Go source code.
-package simple // import "github.com/360EntSecGroup-Skylar/goreporter/linters/simplecode/simple"
+// FIXME: (issue #2) investigate need for this import directive.
+// package simple // import "github.com/360EntSecGroup-Skylar/goreporter/linters/simplecode/simple"
+package simple
 
 import (
 	"go/ast"
@@ -11,7 +13,7 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/360EntSecGroup-Skylar/goreporter/linters/simplecode/lint"
+	"goreporter/linters/simplecode/lint"
 )
 
 var Funcs = []lint.Func{
@@ -442,12 +444,11 @@ func LintIfReturn(f *lint.File) {
 
 // LintRedundantNilCheckWithLen checks for the following reduntant nil-checks:
 //
-//   if x == nil || len(x) == 0 {}
-//   if x != nil && len(x) != 0 {}
-//   if x != nil && len(x) == N {} (where N != 0)
-//   if x != nil && len(x) > N {}
-//   if x != nil && len(x) >= N {} (where N != 0)
-//
+//	if x == nil || len(x) == 0 {}
+//	if x != nil && len(x) != 0 {}
+//	if x != nil && len(x) == N {} (where N != 0)
+//	if x != nil && len(x) > N {}
+//	if x != nil && len(x) >= N {} (where N != 0)
 func LintRedundantNilCheckWithLen(f *lint.File) {
 	isConstZero := func(expr ast.Expr) (isConst bool, isZero bool) {
 		lit, ok := expr.(*ast.BasicLit)

@@ -2,6 +2,7 @@
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
+//go:build go1.5
 // +build go1.5
 
 package ssa_test
@@ -21,10 +22,10 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/360EntSecGroup-Skylar/goreporter/linters/simpler/ssa"
-	"github.com/360EntSecGroup-Skylar/goreporter/linters/simpler/ssa/ssautil"
 	"golang.org/x/tools/go/ast/astutil"
 	"golang.org/x/tools/go/loader"
+	"goreporter/linters/simpler/ssa"
+	"goreporter/linters/simpler/ssa/ssautil"
 )
 
 func TestObjValueLookup(t *testing.T) {
@@ -290,7 +291,6 @@ func TestValueForExpr(t *testing.T) {
 // findInterval parses input and returns the [start, end) positions of
 // the first occurrence of substr in input.  f==nil indicates failure;
 // an error has already been reported in that case.
-//
 func findInterval(t *testing.T, fset *token.FileSet, input, substr string) (f *ast.File, start, end token.Pos) {
 	f, err := parser.ParseFile(fset, "<input>", input, 0)
 	if err != nil {

@@ -2,6 +2,7 @@
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
+//go:build go1.5
 // +build go1.5
 
 package ssautil_test
@@ -15,7 +16,7 @@ import (
 	"os"
 	"testing"
 
-	"github.com/360EntSecGroup-Skylar/goreporter/linters/simpler/ssa/ssautil"
+	"goreporter/linters/simpler/ssa/ssautil"
 )
 
 const hello = `package main

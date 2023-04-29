@@ -2,6 +2,7 @@
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
+//go:build go1.5
 // +build go1.5
 
 package ssa_test
@@ -15,9 +16,9 @@ import (
 	"go/types"
 	"os"
 
-	"github.com/360EntSecGroup-Skylar/goreporter/linters/simpler/ssa"
-	"github.com/360EntSecGroup-Skylar/goreporter/linters/simpler/ssa/ssautil"
 	"golang.org/x/tools/go/loader"
+	"goreporter/linters/simpler/ssa"
+	"goreporter/linters/simpler/ssa/ssautil"
 )
 
 const hello = `
@@ -49,7 +50,6 @@ func main() {
 // Build and run the ssadump.go program if you want a standalone tool
 // with similar functionality. It is located at
 // golang.org/x/tools/cmd/ssadump.
-//
 func ExampleBuildPackage() {
 	// Parse the source files.
 	fset := token.NewFileSet()
@@ -119,7 +119,6 @@ func ExampleBuildPackage() {
 // dependencies from source, using the loader, and then build SSA code
 // for the entire program.  This is what you'd typically use for a
 // whole-program analysis.
-//
 func ExampleLoadProgram() {
 	// Load cmd/cover and its dependencies.
 	var conf loader.Config

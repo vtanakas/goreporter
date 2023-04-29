@@ -1,10 +1,11 @@
 // Copyright 2013 The Go Authors. All rights reserved.
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
+// FIXME: (issue #2) investigate need for this import directive.
+// package ssautil // import "github.com/360EntSecGroup-Skylar/goreporter/linters/simpler/ssa/ssautil"
+package ssautil
 
-package ssautil // import "github.com/360EntSecGroup-Skylar/goreporter/linters/simpler/ssa/ssautil"
-
-import "github.com/360EntSecGroup-Skylar/goreporter/linters/simpler/ssa"
+import "goreporter/linters/simpler/ssa"
 
 // This file defines utilities for visiting the SSA representation of
 // a Program.
@@ -18,7 +19,6 @@ import "github.com/360EntSecGroup-Skylar/goreporter/linters/simpler/ssa"
 // synthetic wrappers.
 //
 // Precondition: all packages are built.
-//
 func AllFunctions(prog *ssa.Program) map[*ssa.Function]bool {
 	visit := visitor{
 		prog: prog,

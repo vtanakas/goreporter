@@ -5,7 +5,9 @@
 // https://developers.google.com/open-source/licenses/bsd.
 
 // Package lint provides the foundation for tools like gosimple.
-package lint // import "github.com/360EntSecGroup-Skylar/goreporter/linters/simpler/lint"
+// FIXME: (issue #2) investigate need for this import directive.
+// package lint // import "github.com/360EntSecGroup-Skylar/goreporter/linters/simpler/lint"
+package lint
 
 import (
 	"bytes"
@@ -21,10 +23,10 @@ import (
 	"strings"
 	"sync"
 
-	"github.com/360EntSecGroup-Skylar/goreporter/linters/simpler/ssa"
-	"github.com/360EntSecGroup-Skylar/goreporter/linters/simpler/ssa/ssautil"
 	"golang.org/x/tools/go/ast/astutil"
 	"golang.org/x/tools/go/loader"
+	"goreporter/linters/simpler/ssa"
+	"goreporter/linters/simpler/ssa/ssautil"
 )
 
 type Job struct {

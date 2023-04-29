@@ -9,10 +9,10 @@ import (
 	"sort"
 	"strings"
 
-	"github.com/360EntSecGroup-Skylar/goreporter/linters/copycheck/job"
-	"github.com/360EntSecGroup-Skylar/goreporter/linters/copycheck/output"
-	"github.com/360EntSecGroup-Skylar/goreporter/linters/copycheck/syntax"
 	"github.com/golang/glog"
+	"goreporter/linters/copycheck/job"
+	"goreporter/linters/copycheck/output"
+	"goreporter/linters/copycheck/syntax"
 )
 
 const defaultThreshold = 15

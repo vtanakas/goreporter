@@ -8,8 +8,8 @@ import (
 	"github.com/golang/glog"
 	"github.com/json-iterator/go"
 
-	"github.com/360EntSecGroup-Skylar/goreporter/linters/unittest"
-	"github.com/360EntSecGroup-Skylar/goreporter/utils"
+	"goreporter/linters/unittest"
+	"goreporter/utils"
 )
 
 type StrategyUnitTest struct {

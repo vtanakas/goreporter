@@ -4,8 +4,8 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/360EntSecGroup-Skylar/goreporter/linters/depth"
-	"github.com/360EntSecGroup-Skylar/goreporter/utils"
+	"goreporter/linters/depth"
+	"goreporter/utils"
 )
 
 type StrategyDepth struct {

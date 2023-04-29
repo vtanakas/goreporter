@@ -4,6 +4,7 @@
 
 // No testdata on Android.
 
+//go:build !android
 // +build !android
 
 package cha_test
@@ -20,10 +21,10 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/360EntSecGroup-Skylar/goreporter/linters/simpler/ssa/ssautil"
-	"github.com/360EntSecGroup-Skylar/goreporter/linters/staticcheck/callgraph"
-	"github.com/360EntSecGroup-Skylar/goreporter/linters/staticcheck/callgraph/cha"
 	"golang.org/x/tools/go/loader"
+	"goreporter/linters/simpler/ssa/ssautil"
+	"goreporter/linters/staticcheck/callgraph"
+	"goreporter/linters/staticcheck/callgraph/cha"
 )
 
 var inputs = []string{
@@ -45,7 +46,6 @@ func expectation(f *ast.File) (string, token.Pos) {
 // TestCHA runs CHA on each file in inputs, prints the dynamic edges of
 // the call graph, and compares it with the golden results embedded in
 // the WANT comment at the end of the file.
-//
 func TestCHA(t *testing.T) {
 	for _, filename := range inputs {
 		content, err := ioutil.ReadFile(filename)

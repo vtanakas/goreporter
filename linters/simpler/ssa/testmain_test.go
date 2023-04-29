@@ -12,9 +12,9 @@ import (
 	"sort"
 	"testing"
 
-	"github.com/360EntSecGroup-Skylar/goreporter/linters/simpler/ssa"
-	"github.com/360EntSecGroup-Skylar/goreporter/linters/simpler/ssa/ssautil"
 	"golang.org/x/tools/go/loader"
+	"goreporter/linters/simpler/ssa"
+	"goreporter/linters/simpler/ssa/ssautil"
 )
 
 func create(t *testing.T, content string) *ssa.Package {

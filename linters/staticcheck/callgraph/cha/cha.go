@@ -21,20 +21,22 @@
 // and all concrete types are put into interfaces, it is sound to run on
 // partial programs, such as libraries without a main or test function.
 //
-package cha // import "github.com/360EntSecGroup-Skylar/goreporter/linters/staticcheck/callgraph/cha"
+// FIXME: (issue #2) investigate need for this import directive.
+// package cha // import "github.com/360EntSecGroup-Skylar/goreporter/linters/staticcheck/callgraph/cha"
+
+package cha
 
 import (
 	"go/types"
 
-	"github.com/360EntSecGroup-Skylar/goreporter/linters/simpler/ssa"
-	"github.com/360EntSecGroup-Skylar/goreporter/linters/simpler/ssa/ssautil"
-	"github.com/360EntSecGroup-Skylar/goreporter/linters/staticcheck/callgraph"
 	"golang.org/x/tools/go/types/typeutil"
+	"goreporter/linters/simpler/ssa"
+	"goreporter/linters/simpler/ssa/ssautil"
+	"goreporter/linters/staticcheck/callgraph"
 )
 
 // CallGraph computes the call graph of the specified program using the
 // Class Hierarchy Analysis algorithm.
-//
 func CallGraph(prog *ssa.Program) *callgraph.Graph {
 	cg := callgraph.New(nil) // TODO(adonovan) eliminate concept of rooted callgraph
 
