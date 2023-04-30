@@ -1,14 +1,15 @@
-package engine
+package strategy
 
 import (
 	"fmt"
+	"goreporter/engine"
 
 	"goreporter/linters/gofmt"
 	"goreporter/utils"
 )
 
 type StrategyGoFmt struct {
-	Sync *Synchronizer `inject:""`
+	Sync *engine.Synchronizer `inject:""`
 }
 
 func (s *StrategyGoFmt) GetName() string {
@@ -23,8 +24,8 @@ func (s *StrategyGoFmt) GetWeight() float64 {
 	return 0.05
 }
 
-func (s *StrategyGoFmt) Compute(parameters StrategyParameter) (summaries *Summaries) {
-	summaries = NewSummaries()
+func (s *StrategyGoFmt) Compute(parameters engine.StrategyParameter) (summaries *engine.Summaries) {
+	summaries = engine.NewSummaries()
 	slicePackagePaths := make([]string, 0)
 	for _, packagePath := range parameters.AllDirs {
 		slicePackagePaths = append(slicePackagePaths, packagePath)
@@ -37,7 +38,7 @@ func (s *StrategyGoFmt) Compute(parameters StrategyParameter) (summaries *Summar
 	processUnit := utils.GetProcessUnit(sumProcessNumber, len(lints))
 	for _, lintTip := range lints {
 		packageName := utils.PackageNameFromGoPath(lintTip)
-		erroru := Error{
+		erroru := engine.Error{
 			LineNumber:  1,
 			ErrorString: utils.AbsPath(lintTip) + ":warning: file is not gofmted with -s (gofmt)",
 		}
@@ -46,9 +47,9 @@ func (s *StrategyGoFmt) Compute(parameters StrategyParameter) (summaries *Summar
 			summarie.Errors = append(summarie.Errors, erroru)
 			summaries.Summaries[packageName] = summarie
 		} else {
-			summarie := Summary{
+			summarie := engine.Summary{
 				Name:   packageName,
-				Errors: make([]Error, 0),
+				Errors: make([]engine.Error, 0),
 			}
 			summarie.Errors = append(summarie.Errors, erroru)
 			summaries.Summaries[packageName] = summarie
@@ -64,7 +65,7 @@ func (s *StrategyGoFmt) Compute(parameters StrategyParameter) (summaries *Summar
 	return summaries
 }
 
-func (s *StrategyGoFmt) Percentage(summaries *Summaries) float64 {
+func (s *StrategyGoFmt) Percentage(summaries *engine.Summaries) float64 {
 	summaries.RLock()
 	defer summaries.RUnlock()
 	return utils.CountPercentage(len(summaries.Summaries))

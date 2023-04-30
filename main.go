@@ -19,6 +19,7 @@ package main
 import (
 	"flag"
 	"fmt"
+	"goreporter/lint/strategy"
 	"io/ioutil"
 	"log"
 	"os"
@@ -112,19 +113,19 @@ func main() {
 	waitGW := &engine.WaitGroupWrapper{}
 
 	reporter := engine.NewReporter(*projectPath, *reportPath, *reportFormat, templateHtml)
-	strategyCountCode := &engine.StrategyCountCode{}
-	strategyCyclo := &engine.StrategyCyclo{}
-	strategyDeadCode := &engine.StrategyDeadCode{}
-	strategyDependGraph := &engine.StrategyDependGraph{}
-	strategyDepth := &engine.StrategyDepth{}
-	strategyImportPackages := &engine.StrategyImportPackages{}
-	strategyInterfacer := &engine.StrategyInterfacer{}
-	strategySimpleCode := &engine.StrategySimpleCode{}
-	strategySpellCheck := &engine.StrategySpellCheck{}
-	strategyUnitTest := &engine.StrategyUnitTest{}
-	strategyLint := &engine.StrategyLint{}
-	strategyGoVet := &engine.StrategyGoVet{}
-	strategyGoFmt := &engine.StrategyGoFmt{}
+	strategyCountCode := &strategy.StrategyCountCode{}
+	strategyCyclo := &strategy.StrategyCyclo{}
+	strategyDeadCode := &strategy.StrategyDeadCode{}
+	strategyDependGraph := &strategy.StrategyDependGraph{}
+	strategyDepth := &strategy.StrategyDepth{}
+	strategyImportPackages := &strategy.StrategyImportPackages{}
+	strategyInterfacer := &strategy.StrategyInterfacer{}
+	strategySimpleCode := &strategy.StrategySimpleCode{}
+	strategySpellCheck := &strategy.StrategySpellCheck{}
+	strategyUnitTest := &strategy.StrategyUnitTest{}
+	strategyLint := &strategy.StrategyLint{}
+	strategyGoVet := &strategy.StrategyGoVet{}
+	strategyGoFmt := &strategy.StrategyGoFmt{}
 
 	if err := inject.Populate(
 		reporter,

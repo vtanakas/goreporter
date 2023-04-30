@@ -1,6 +1,7 @@
-package engine
+package strategy
 
 import (
+	"goreporter/engine"
 	"strconv"
 	"strings"
 
@@ -9,7 +10,7 @@ import (
 )
 
 type StrategyDeadCode struct {
-	Sync *Synchronizer `inject:""`
+	Sync *engine.Synchronizer `inject:""`
 }
 
 func (s *StrategyDeadCode) GetName() string {
@@ -27,8 +28,8 @@ func (s *StrategyDeadCode) GetWeight() float64 {
 // linterDead provides a function that will scans all useless code, or never
 // obsolete obsolete code.It will extract from the linter need to convert
 // the data.The result will be saved in the r's attributes.
-func (s *StrategyDeadCode) Compute(parameters StrategyParameter) (summaries *Summaries) {
-	summaries = NewSummaries()
+func (s *StrategyDeadCode) Compute(parameters engine.StrategyParameter) (summaries *engine.Summaries) {
+	summaries = engine.NewSummaries()
 
 	deadcodes := deadcode.DeadCode(parameters.ProjectPath)
 	sumProcessNumber := int64(10)
@@ -38,7 +39,7 @@ func (s *StrategyDeadCode) Compute(parameters StrategyParameter) (summaries *Sum
 		if len(deadCodeTips) == 4 {
 			packageName := utils.PackageNameFromGoPath(deadCodeTips[0])
 			line, _ := strconv.Atoi(deadCodeTips[1])
-			erroru := Error{
+			erroru := engine.Error{
 				LineNumber:  line,
 				ErrorString: utils.AbsPath(deadCodeTips[0]) + ":" + strings.Join(deadCodeTips[1:], ":"),
 			}
@@ -47,9 +48,9 @@ func (s *StrategyDeadCode) Compute(parameters StrategyParameter) (summaries *Sum
 				summary.Errors = append(summary.Errors, erroru)
 				summaries.Summaries[packageName] = summary
 			} else {
-				summarie := Summary{
+				summarie := engine.Summary{
 					Name:   utils.PackageAbsPathExceptSuffix(deadCodeTips[0]),
-					Errors: make([]Error, 0),
+					Errors: make([]engine.Error, 0),
 				}
 				summarie.Errors = append(summarie.Errors, erroru)
 				summaries.Summaries[packageName] = summarie
@@ -64,7 +65,7 @@ func (s *StrategyDeadCode) Compute(parameters StrategyParameter) (summaries *Sum
 	return
 }
 
-func (s *StrategyDeadCode) Percentage(summaries *Summaries) float64 {
+func (s *StrategyDeadCode) Percentage(summaries *engine.Summaries) float64 {
 	summaries.Lock()
 	defer summaries.Unlock()
 	return utils.CountPercentage(len(summaries.Summaries))

@@ -1,6 +1,7 @@
-package engine
+package strategy
 
 import (
+	"goreporter/engine"
 	"strconv"
 	"strings"
 
@@ -9,7 +10,7 @@ import (
 )
 
 type StrategyCopyCheck struct {
-	Sync *Synchronizer `inject:""`
+	Sync *engine.Synchronizer `inject:""`
 }
 
 func (s *StrategyCopyCheck) GetName() string {
@@ -27,15 +28,15 @@ func (s *StrategyCopyCheck) GetWeight() float64 {
 // linterCopy provides a function that scans all duplicate code in the project and give
 // duplicate code locations and rows.It will extract from the linter need to convert the
 // data.The result will be saved in the r's attributes.
-func (s *StrategyCopyCheck) Compute(parameters StrategyParameter) (summaries *Summaries) {
-	summaries = NewSummaries()
+func (s *StrategyCopyCheck) Compute(parameters engine.StrategyParameter) (summaries *engine.Summaries) {
+	summaries = engine.NewSummaries()
 
 	copyCodeList := copycheck.CopyCheck(parameters.ProjectPath, parameters.ExceptPackages+",_test.go")
 	sumProcessNumber := int64(7)
 	processUnit := utils.GetProcessUnit(sumProcessNumber, len(copyCodeList))
 
 	for i := 0; i < len(copyCodeList); i++ {
-		errorSlice := make([]Error, 0)
+		errorSlice := make([]engine.Error, 0)
 		for j := 0; j < len(copyCodeList[i]); j++ {
 			line := 0
 			values := strings.Split(copyCodeList[i][j], ":")
@@ -51,10 +52,10 @@ func (s *StrategyCopyCheck) Compute(parameters StrategyParameter) (summaries *Su
 				values[0] = utils.AbsPath(values[0])
 			}
 
-			errorSlice = append(errorSlice, Error{LineNumber: line, ErrorString: strings.Join(values, ":")})
+			errorSlice = append(errorSlice, engine.Error{LineNumber: line, ErrorString: strings.Join(values, ":")})
 		}
 		summaries.Lock()
-		summaries.Summaries[string(i)] = Summary{
+		summaries.Summaries[string(i)] = engine.Summary{
 			Name:   strconv.Itoa(len(errorSlice)),
 			Errors: errorSlice,
 		}
@@ -67,7 +68,7 @@ func (s *StrategyCopyCheck) Compute(parameters StrategyParameter) (summaries *Su
 	return
 }
 
-func (s *StrategyCopyCheck) Percentage(summaries *Summaries) float64 {
+func (s *StrategyCopyCheck) Percentage(summaries *engine.Summaries) float64 {
 	summaries.RLock()
 	defer summaries.RUnlock()
 	return utils.CountPercentage(len(summaries.Summaries))

@@ -1,6 +1,7 @@
-package engine
+package strategy
 
 import (
+	"goreporter/engine"
 	"strconv"
 	"strings"
 
@@ -9,7 +10,7 @@ import (
 )
 
 type StrategySimpleCode struct {
-	Sync *Synchronizer `inject:""`
+	Sync *engine.Synchronizer `inject:""`
 }
 
 func (s *StrategySimpleCode) GetName() string {
@@ -24,8 +25,8 @@ func (s *StrategySimpleCode) GetWeight() float64 {
 	return 0.05
 }
 
-func (s *StrategySimpleCode) Compute(parameters StrategyParameter) (summaries *Summaries) {
-	summaries = NewSummaries()
+func (s *StrategySimpleCode) Compute(parameters engine.StrategyParameter) (summaries *engine.Summaries) {
+	summaries = engine.NewSummaries()
 
 	simples := simplecode.Simple(parameters.AllDirs, parameters.ExceptPackages)
 	sumProcessNumber := int64(10)
@@ -35,7 +36,7 @@ func (s *StrategySimpleCode) Compute(parameters StrategyParameter) (summaries *S
 		if len(simpleTips) == 4 {
 			packageName := utils.PackageNameFromGoPath(simpleTips[0])
 			line, _ := strconv.Atoi(simpleTips[1])
-			erroru := Error{
+			erroru := engine.Error{
 				LineNumber:  line,
 				ErrorString: utils.AbsPath(simpleTips[0]) + ":" + strings.Join(simpleTips[1:], ":"),
 			}
@@ -44,9 +45,9 @@ func (s *StrategySimpleCode) Compute(parameters StrategyParameter) (summaries *S
 				summarie.Errors = append(summarie.Errors, erroru)
 				summaries.Summaries[packageName] = summarie
 			} else {
-				summarie := Summary{
+				summarie := engine.Summary{
 					Name:   packageName,
-					Errors: make([]Error, 0),
+					Errors: make([]engine.Error, 0),
 				}
 				summarie.Errors = append(summarie.Errors, erroru)
 				summaries.Summaries[packageName] = summarie
@@ -62,7 +63,7 @@ func (s *StrategySimpleCode) Compute(parameters StrategyParameter) (summaries *S
 	return summaries
 }
 
-func (s *StrategySimpleCode) Percentage(summaries *Summaries) float64 {
+func (s *StrategySimpleCode) Percentage(summaries *engine.Summaries) float64 {
 	summaries.RLock()
 	defer summaries.RUnlock()
 	return utils.CountPercentage(len(summaries.Summaries))

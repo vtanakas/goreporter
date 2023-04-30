@@ -1,6 +1,7 @@
-package engine
+package strategy
 
 import (
+	"goreporter/engine"
 	"path/filepath"
 	"strconv"
 	"sync"
@@ -13,7 +14,7 @@ import (
 )
 
 type StrategyUnitTest struct {
-	Sync       *Synchronizer `inject:""`
+	Sync       *engine.Synchronizer `inject:""`
 	sumCover   float64
 	countCover int
 }
@@ -30,8 +31,8 @@ func (s *StrategyUnitTest) GetWeight() float64 {
 	return 0.3
 }
 
-func (s *StrategyUnitTest) Compute(parameters StrategyParameter) (summaries *Summaries) {
-	summaries = NewSummaries()
+func (s *StrategyUnitTest) Compute(parameters engine.StrategyParameter) (summaries *engine.Summaries) {
+	summaries = engine.NewSummaries()
 
 	sumProcessNumber := int64(30)
 	processUnit := utils.GetProcessUnit(sumProcessNumber, len(parameters.UnitTestDirs))
@@ -42,7 +43,7 @@ func (s *StrategyUnitTest) Compute(parameters StrategyParameter) (summaries *Sum
 		pkg.Add(1)
 		go func(pkgName, pkgPath string) {
 			unitTestRes, _ := unittest.UnitTest("." + string(filepath.Separator) + pkgPath)
-			var packageTest PackageTest
+			var packageTest engine.PackageTest
 			if len(unitTestRes) >= 5 {
 				if unitTestRes[0] == "ok" {
 					packageTest.IsPass = true
@@ -75,7 +76,7 @@ func (s *StrategyUnitTest) Compute(parameters StrategyParameter) (summaries *Sum
 				glog.Errorln(err)
 			}
 			summaries.Lock()
-			summaries.Summaries[pkgName] = Summary{
+			summaries.Summaries[pkgName] = engine.Summary{
 				Name:        pkgName,
 				Description: string(jsonStringPackageTest),
 			}
@@ -93,7 +94,7 @@ func (s *StrategyUnitTest) Compute(parameters StrategyParameter) (summaries *Sum
 	return
 }
 
-func (s *StrategyUnitTest) Percentage(summaries *Summaries) float64 {
+func (s *StrategyUnitTest) Percentage(summaries *engine.Summaries) float64 {
 	if s.countCover == 0 {
 		return 0.0
 	} else {

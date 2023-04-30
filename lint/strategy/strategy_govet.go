@@ -1,36 +1,41 @@
-package engine
+package strategy
 
 import (
+	"fmt"
+	"goreporter/engine"
 	"strconv"
 	"strings"
 
-	"goreporter/linters/golint"
+	"goreporter/linters/govet"
 	"goreporter/utils"
 )
 
-type StrategyLint struct {
-	Sync *Synchronizer `inject:""`
+type StrategyGoVet struct {
+	Sync *engine.Synchronizer `inject:""`
 }
 
-func (s *StrategyLint) GetName() string {
-	return "GoLint"
+func (s *StrategyGoVet) GetName() string {
+	return "GoVet"
 }
 
-func (s *StrategyLint) GetDescription() string {
-	return "All golang code hints that can be optimized and give suggestions for changes."
+func (s *StrategyGoVet) GetDescription() string {
+	return "go vet examines Go source code and reports suspicious constructs, such as Printf calls whose arguments do not align with the format string."
 }
 
-func (s *StrategyLint) GetWeight() float64 {
-	return 0.05
+func (s *StrategyGoVet) GetWeight() float64 {
+	return 0.1
 }
 
-func (s *StrategyLint) Compute(parameters StrategyParameter) (summaries *Summaries) {
-	summaries = NewSummaries()
+func (s *StrategyGoVet) Compute(parameters engine.StrategyParameter) (summaries *engine.Summaries) {
+	summaries = engine.NewSummaries()
 	slicePackagePaths := make([]string, 0)
 	for _, packagePath := range parameters.AllDirs {
 		slicePackagePaths = append(slicePackagePaths, packagePath)
 	}
-	lints := golint.GoLinter(slicePackagePaths)
+	lints, err := govet.GoVet(slicePackagePaths)
+	if err != nil {
+		fmt.Println(err)
+	}
 	sumProcessNumber := int64(10)
 	processUnit := utils.GetProcessUnit(sumProcessNumber, len(lints))
 	for _, lintTip := range lints {
@@ -38,7 +43,7 @@ func (s *StrategyLint) Compute(parameters StrategyParameter) (summaries *Summari
 		if len(lintTips) == 4 {
 			packageName := utils.PackageNameFromGoPath(lintTips[0])
 			line, _ := strconv.Atoi(lintTips[1])
-			erroru := Error{
+			erroru := engine.Error{
 				LineNumber:  line,
 				ErrorString: utils.AbsPath(lintTips[0]) + ":" + strings.Join(lintTips[1:], ":"),
 			}
@@ -47,9 +52,9 @@ func (s *StrategyLint) Compute(parameters StrategyParameter) (summaries *Summari
 				summarie.Errors = append(summarie.Errors, erroru)
 				summaries.Summaries[packageName] = summarie
 			} else {
-				summarie := Summary{
+				summarie := engine.Summary{
 					Name:   packageName,
-					Errors: make([]Error, 0),
+					Errors: make([]engine.Error, 0),
 				}
 				summarie.Errors = append(summarie.Errors, erroru)
 				summaries.Summaries[packageName] = summarie
@@ -65,7 +70,7 @@ func (s *StrategyLint) Compute(parameters StrategyParameter) (summaries *Summari
 	return summaries
 }
 
-func (s *StrategyLint) Percentage(summaries *Summaries) float64 {
+func (s *StrategyGoVet) Percentage(summaries *engine.Summaries) float64 {
 	summaries.RLock()
 	defer summaries.RUnlock()
 	return utils.CountPercentage(len(summaries.Summaries))

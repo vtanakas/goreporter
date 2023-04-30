@@ -1,6 +1,7 @@
-package engine
+package strategy
 
 import (
+	"goreporter/engine"
 	"strconv"
 	"strings"
 
@@ -9,7 +10,7 @@ import (
 )
 
 type StrategyDepth struct {
-	Sync            *Synchronizer `inject:""`
+	Sync            *engine.Synchronizer `inject:""`
 	compBigThan3    int
 	sumAverageDepth float64
 	allDirs         map[string]string
@@ -29,8 +30,8 @@ func (s *StrategyDepth) GetWeight() float64 {
 
 // Compute all [.go] file's function maximum depth. It is an important indicator
 // that allows developer to see whether a function needs to be splitted into smaller functions for readability purpose
-func (s *StrategyDepth) Compute(parameters StrategyParameter) (summaries *Summaries) {
-	summaries = NewSummaries()
+func (s *StrategyDepth) Compute(parameters engine.StrategyParameter) (summaries *engine.Summaries) {
+	summaries = engine.NewSummaries()
 
 	s.allDirs = parameters.AllDirs
 
@@ -38,7 +39,7 @@ func (s *StrategyDepth) Compute(parameters StrategyParameter) (summaries *Summar
 	processUnit := utils.GetProcessUnit(sumProcessNumber, len(s.allDirs))
 
 	for pkgName, pkgPath := range s.allDirs {
-		errors := make([]Error, 0)
+		errors := make([]engine.Error, 0)
 		depthResult, avg := depth.Depth(pkgPath)
 		avgfloat, _ := strconv.ParseFloat(avg, 64)
 		s.sumAverageDepth = s.sumAverageDepth + avgfloat
@@ -46,7 +47,7 @@ func (s *StrategyDepth) Compute(parameters StrategyParameter) (summaries *Summar
 			depthvalues := strings.Split(val, " ")
 			if len(depthvalues) == 4 {
 				comp, _ := strconv.Atoi(depthvalues[0])
-				erroru := Error{
+				erroru := engine.Error{
 					LineNumber:  comp,
 					ErrorString: utils.AbsPath(depthvalues[3]),
 				}
@@ -57,7 +58,7 @@ func (s *StrategyDepth) Compute(parameters StrategyParameter) (summaries *Summar
 			}
 		}
 		summaries.Lock()
-		summaries.Summaries[pkgName] = Summary{
+		summaries.Summaries[pkgName] = engine.Summary{
 			Name:        pkgName,
 			Errors:      errors,
 			Description: avg,
@@ -72,6 +73,6 @@ func (s *StrategyDepth) Compute(parameters StrategyParameter) (summaries *Summar
 	return
 }
 
-func (s *StrategyDepth) Percentage(summaries *Summaries) float64 {
+func (s *StrategyDepth) Percentage(summaries *engine.Summaries) float64 {
 	return utils.CountPercentage(s.compBigThan3 + int(s.sumAverageDepth/float64(len(s.allDirs))) - 1)
 }

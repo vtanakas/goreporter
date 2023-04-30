@@ -14,6 +14,7 @@
 package engine
 
 import (
+	"goreporter/lint/strategy"
 	"log"
 	"sync"
 	"testing"
@@ -32,17 +33,17 @@ func Test_Engine(t *testing.T) {
 	waitGW := &WaitGroupWrapper{}
 
 	reporter := NewReporter("../../../wgliang/logcool", "foo", "foo", "baz")
-	strategyCopyCheck := &StrategyCopyCheck{}
-	strategyCountCode := &StrategyCountCode{}
-	strategyCyclo := &StrategyCyclo{}
-	strategyDeadCode := &StrategyDeadCode{}
-	strategyDependGraph := &StrategyDependGraph{}
-	strategyDepth := &StrategyDepth{}
-	strategyImportPackages := &StrategyImportPackages{}
-	strategyInterfacer := &StrategyInterfacer{}
-	strategySimpleCode := &StrategySimpleCode{}
-	strategySpellCheck := &StrategySpellCheck{}
-	strategyUnitTest := &StrategyUnitTest{}
+	strategyCopyCheck := &strategy.StrategyCopyCheck{}
+	strategyCountCode := &strategy.StrategyCountCode{}
+	strategyCyclo := &strategy.StrategyCyclo{}
+	strategyDeadCode := &strategy.StrategyDeadCode{}
+	strategyDependGraph := &strategy.StrategyDependGraph{}
+	strategyDepth := &strategy.StrategyDepth{}
+	strategyImportPackages := &strategy.StrategyImportPackages{}
+	strategyInterfacer := &strategy.StrategyInterfacer{}
+	strategySimpleCode := &strategy.StrategySimpleCode{}
+	strategySpellCheck := &strategy.StrategySpellCheck{}
+	strategyUnitTest := &strategy.StrategyUnitTest{}
 
 	if err := inject.Populate(
 		reporter,

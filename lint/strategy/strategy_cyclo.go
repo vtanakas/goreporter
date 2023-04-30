@@ -1,6 +1,7 @@
-package engine
+package strategy
 
 import (
+	"goreporter/engine"
 	"math"
 	"strconv"
 	"strings"
@@ -10,7 +11,7 @@ import (
 )
 
 type StrategyCyclo struct {
-	Sync            *Synchronizer `inject:""`
+	Sync            *engine.Synchronizer `inject:""`
 	compBigThan15   int
 	sumAverageCyclo float64
 	allDirs         map[string]string
@@ -28,8 +29,8 @@ func (s *StrategyCyclo) GetWeight() float64 {
 	return 0.2
 }
 
-func (s *StrategyCyclo) Compute(parameters StrategyParameter) (summaries *Summaries) {
-	summaries = NewSummaries()
+func (s *StrategyCyclo) Compute(parameters engine.StrategyParameter) (summaries *engine.Summaries) {
+	summaries = engine.NewSummaries()
 
 	s.allDirs = parameters.AllDirs
 
@@ -37,7 +38,7 @@ func (s *StrategyCyclo) Compute(parameters StrategyParameter) (summaries *Summar
 	processUnit := utils.GetProcessUnit(sumProcessNumber, len(s.allDirs))
 
 	for pkgName, pkgPath := range s.allDirs {
-		errSlice := make([]Error, 0)
+		errSlice := make([]engine.Error, 0)
 
 		cyclos, avg := cyclo.Cyclo(pkgPath, parameters.ExceptPackages)
 		average, _ := strconv.ParseFloat(avg, 64)
@@ -51,7 +52,7 @@ func (s *StrategyCyclo) Compute(parameters StrategyParameter) (summaries *Summar
 			cyclovalues := strings.Split(val, " ")
 			if len(cyclovalues) == 4 {
 				comp, _ := strconv.Atoi(cyclovalues[0])
-				erroru := Error{
+				erroru := engine.Error{
 					LineNumber:  comp,
 					ErrorString: utils.AbsPath(cyclovalues[3]),
 				}
@@ -62,7 +63,7 @@ func (s *StrategyCyclo) Compute(parameters StrategyParameter) (summaries *Summar
 			}
 		}
 		summaries.Lock()
-		summaries.Summaries[pkgName] = Summary{
+		summaries.Summaries[pkgName] = engine.Summary{
 			Name:   pkgName,
 			Errors: errSlice,
 			Avg:    average,
@@ -76,6 +77,6 @@ func (s *StrategyCyclo) Compute(parameters StrategyParameter) (summaries *Summar
 	return
 }
 
-func (s *StrategyCyclo) Percentage(summaries *Summaries) float64 {
+func (s *StrategyCyclo) Percentage(summaries *engine.Summaries) float64 {
 	return utils.CountPercentage(s.compBigThan15 + int(s.sumAverageCyclo/float64(len(s.allDirs))) - 1)
 }
