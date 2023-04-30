@@ -5,7 +5,7 @@ import (
 	"goreporter/engine"
 	"strconv"
 
-	"goreporter/linters/countcode"
+	"goreporter/lint/linters/countcode"
 	"goreporter/utils"
 )
 

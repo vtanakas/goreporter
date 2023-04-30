@@ -2,7 +2,7 @@ package strategy
 
 import (
 	"goreporter/engine"
-	"goreporter/linters/depend"
+	"goreporter/lint/linters/depend"
 )
 
 type StrategyDependGraph struct {

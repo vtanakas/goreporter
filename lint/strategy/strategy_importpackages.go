@@ -2,7 +2,7 @@ package strategy
 
 import (
 	"goreporter/engine"
-	"goreporter/linters/unittest"
+	"goreporter/lint/linters/unittest"
 	"goreporter/utils"
 )
 

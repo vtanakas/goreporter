@@ -5,7 +5,7 @@ import (
 	"strconv"
 	"strings"
 
-	"goreporter/linters/deadcode"
+	"goreporter/lint/linters/deadcode"
 	"goreporter/utils"
 )
 

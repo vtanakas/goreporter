@@ -9,7 +9,7 @@ import (
 	"github.com/golang/glog"
 	"github.com/json-iterator/go"
 
-	"goreporter/linters/unittest"
+	"goreporter/lint/linters/unittest"
 	"goreporter/utils"
 )
 

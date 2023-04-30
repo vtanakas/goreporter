@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"goreporter/engine"
 
-	"goreporter/linters/gofmt"
+	"goreporter/lint/linters/gofmt"
 	"goreporter/utils"
 )
 

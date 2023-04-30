@@ -5,7 +5,7 @@ import (
 	"strconv"
 	"strings"
 
-	"goreporter/linters/copycheck"
+	"goreporter/lint/linters/copycheck"
 	"goreporter/utils"
 )
 

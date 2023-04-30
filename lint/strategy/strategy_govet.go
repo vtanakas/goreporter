@@ -6,7 +6,7 @@ import (
 	"strconv"
 	"strings"
 
-	"goreporter/linters/govet"
+	"goreporter/lint/linters/govet"
 	"goreporter/utils"
 )
 
